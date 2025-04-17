@@ -5,7 +5,7 @@ function NewJobPage() {
     return (
         <>
             <HeadProvider>
-                <Title>Post a Job – Jobify</Title>
+                <Title>Post a Job – Archie</Title>
                 <Meta
                     name="description"
                     content="Post job openings on Jobify and find the ideal talent for your company. Attract candidates quickly."

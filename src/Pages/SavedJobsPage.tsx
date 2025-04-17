@@ -6,7 +6,7 @@ function SavedJobsPage() {
     return (
         <>
             <HeadProvider>
-                <Title>Saved Jobs – Jobify</Title>
+                <Title>Saved Jobs – Archie</Title>
                 <Meta
                     name="description"
                     content="Review and manage all the job listings you’ve saved on Jobify. Never lose track of your favorite opportunities."

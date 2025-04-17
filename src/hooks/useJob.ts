@@ -31,7 +31,7 @@ const useJobs = () => {
     }
   }, [loadJobs, loadSavedJobs]);
 
-  // 2. Sincronizar jobs en localStorage
+  // 2. sync jobs in localStorage
   useEffect(() => {
     if (!hasMountedJobs.current) {
       hasMountedJobs.current = true;
