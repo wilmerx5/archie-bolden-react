@@ -11,13 +11,12 @@ export default function Modal() {
         <>
             <Transition appear show={showModal} as={Fragment}>
                 <Dialog as="div" className="relative z-50 " onClose={closeModal}>
-                    {/* Fondo oscuro */}
                     <Transition.Child
                         as={Fragment}
                         enter="ease-out duration-300"
-                        leave="ease-in duration-0"
-                        leaveFrom="opacity-100"
-                        leaveTo="opacity-0"
+                        leave="ease-in-out duration-300"
+                        leaveFrom="opacity-100 scale-100 "
+                        leaveTo="opacity-0  scale-99"
                     >
                         <div className="fixed inset-0 bg-black opacity-50" />
                     </Transition.Child>
@@ -29,9 +28,9 @@ export default function Modal() {
                                 enter="ease-out duration-500"
                                 enterFrom="opacity-0 scale-95"
                                 enterTo="opacity-100 scale-100"
-                                leave="ease-in duration-100"
-                                leaveFrom="opacity-100 scale-100"
-                                leaveTo="opacity-0 scale-95"
+                                   leaveFrom="opacity-10 scale-100"
+                        leaveTo="opacity-0 scale-95"
+                               
                             >
                                 <Dialog.Panel className="relative w-full bg-white rounded-xl shadow-2xl transform transition-all sm:max-w-2xl">
                                     {updating ? (

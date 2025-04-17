@@ -6,8 +6,8 @@ import { DraftJob } from "../../types/job";
 import FormError from "../Utils/FormError";
 
 
+export const jobTypes = ["Full-time", "Contract", "Part-time"];
 export default function FormJob() {
-    const jobTypes = ["Full-time", "Contract", "Part-time"];
     const { addJob, updating, selectedJob, updateJob } = useJobsStore()
 
     const {
@@ -51,34 +51,74 @@ export default function FormJob() {
             </h2>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                {[
-                    { label: "Job Title", name: "title", placeholder: "e.g. Frontend Developer" },
-                    { label: "Company", name: "company", placeholder: "e.g. BizInc Solutions" },
-                    { label: "Location", name: "location", placeholder: "e.g. Remote or Medellín" },
-                ].map(({ label, name, placeholder }) => (
-                    <div key={name}>
-                        <label
-                            htmlFor={name}
-                            className="block mb-2 text-sm font-semibold text-gray-700">
-                            {label}
-                        </label>
-                        <input
-                            id={name}
-                            {...register(name, {
-                                required: `${label} is required`,
-                            })}
-                            placeholder={placeholder}
-                            className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-200 focus:border-blue-600 transition text-gray-800"
-                        />
-                        {errors[name] && (
-                            <FormError>
-                                {errors[name]?.message}
 
-                            </FormError>
+                <div>
+                    <label
+                        htmlFor="title"
+                        className="block mb-2 text-sm font-semibold text-gray-700"
+                    >
+                        Job Title
+                    </label>
+                    <input
+                        id="title"
+                        {...register("title", {
+                            required: "Job Title is required",
+                        })}
+                        placeholder="e.g. Frontend Developer"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-200 focus:border-blue-600 transition text-gray-800"
+                    />
+                    {errors.title && (
+                        <FormError>
+                            {errors.title?.message}
+                        </FormError>
+                    )}
+                </div>
 
-                        )}
-                    </div>
-                ))}
+                <div>
+                    <label
+                        htmlFor="company"
+                        className="block mb-2 text-sm font-semibold text-gray-700"
+                    >
+                        Company
+                    </label>
+                    <input
+                        id="company"
+                        {...register("company", {
+                            required: "Company is required",
+                        })}
+                        placeholder="e.g. BizInc Solutions"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-200 focus:border-blue-600 transition text-gray-800"
+                    />
+                    {errors.company && (
+                        <FormError>
+                            {errors.company?.message}
+                        </FormError>
+                    )}
+                </div>
+
+                <div>
+                    <label
+                        htmlFor="location"
+                        className="block mb-2 text-sm font-semibold text-gray-700"
+                    >
+                        Location
+                    </label>
+                    <input
+                        id="location"
+                        {...register("location", {
+                            required: "Location is required",
+                        })}
+                        placeholder="e.g. Remote or Medellín"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-200 focus:border-blue-600 transition text-gray-800"
+                    />
+                    {errors.location && (
+                        <FormError>
+                            {errors.location?.message}
+                        </FormError>
+                    )}
+                </div>
+
+
 
                 <div>
                     <label

@@ -17,9 +17,6 @@ const Header = () => {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-6 text-gray-700 font-medium">
           <NavLink to="/" className="hover:text-blue-600 transition-colors">Home</NavLink>
-          <NavLink to="#" className="hover:text-blue-600 transition-colors">Jobs</NavLink>
-          <NavLink to="#" className="hover:text-blue-600 transition-colors">About</NavLink>
-          <NavLink to="#" className="hover:text-blue-600 transition-colors">Contact</NavLink>
         </nav>
 
         {/* CTA Button - Desktop only */}
@@ -57,11 +54,12 @@ const Header = () => {
       {menuOpen && (
         <div className="md:hidden px-4 pb-4 pt-2 space-y-2 bg-white shadow">
           <nav className="flex flex-col text-gray-700 font-medium space-y-2">
-            <NavLink to="/" className="hover:text-blue-600 transition-colors">Home</NavLink>
-            <NavLink to="#" className="hover:text-blue-600 transition-colors">Jobs</NavLink>
-            <NavLink to="#" className="hover:text-blue-600 transition-colors">About</NavLink>
-            <NavLink to="#" className="hover:text-blue-600 transition-colors">Contact</NavLink>
-            <NavLink to='/new' className="mt-2 bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700 transition-colors">
+            <NavLink
+             onClick={()=>setMenuOpen(false)}
+            to="/" className="hover:text-blue-600 transition-colors">Home</NavLink>
+            <NavLink 
+            onClick={()=>setMenuOpen(false)}
+            to='/new' className="mt-2 bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700 transition-colors">
               Post a Job
             </NavLink>
           </nav>

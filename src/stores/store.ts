@@ -5,12 +5,15 @@ type JobStore = {
     jobs: Job[],
     selectedJob: Job,
     updating:boolean,
+    selectedJobType:string,
     addJob: (job: DraftJob) => void,
     selectJob: (job: Job) => void,
     closeModal: () => void,
     loadJobs:(jobs:Job[])=>void
     setUpdating: ()=> void,
-    updateJob: (job:DraftJob)=>void
+    updateJob: (job:DraftJob)=>void,
+    setJobTypeFiler: (jobType:string)=> void
+    
 }
 
 const initialSelectedJob:Job = {
@@ -26,7 +29,7 @@ export const useJobsStore = create<JobStore>((set, get) => ({
     jobs: [],
     selectedJob: initialSelectedJob,
     updating:false,
-
+    selectedJobType:'',
     addJob: (job) => {
         const newJob: Job = { ...job, id: uuid() }
         set({
@@ -62,5 +65,11 @@ export const useJobsStore = create<JobStore>((set, get) => ({
         })
         
         get().closeModal()
+    },
+    setJobTypeFiler:(jobType)=>{
+        set({
+            selectedJobType:jobType
+        })
+
     }
 }))
