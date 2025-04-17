@@ -8,4 +8,7 @@
     
     "./jest-setup.ts"
   ],
+  "compilerOptions": {
+    "types": ["vitest/globals"]
+  }
 }

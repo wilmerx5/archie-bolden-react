@@ -11,7 +11,7 @@ function JobFilter() {
 
     }
     return (
-        <section className="p-6 bg-white shadow rounded-lg max-w-lg mx-auto ">
+        <section className="p-6 bg-white shadow rounded-lg max-w-lg mx-auto mb-10 ">
         <fieldset className="space-y-4">
           <legend className="text-xl font-semibold text-gray-800 mb-4">Filter Jobs By Type</legend>
           

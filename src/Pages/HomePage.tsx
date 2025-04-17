@@ -1,6 +1,5 @@
 import JobFilter from "../components/Jobs/JobFilter";
 import JobList from "../components/Jobs/JobList";
-import Modal from "../components/Modal/Modal";
 
 
 import { HeadProvider } from 'react-head';
@@ -10,30 +9,44 @@ import { Meta, Title } from 'react-head';
 function HomePage() {
     return (
         <div>
-            {/* SEO Setup */}
             <HeadProvider>
-                <Title>Jobify - Portal de Empleos</Title>
-                <Meta name="description" content="Jobify es tu plataforma de empleos favorita. Encuentra trabajos fácilmente desde tu navegador." />
+                <Title>Jobify – Job Portal</Title>
+                <Meta
+                    name="description"
+                    content="Jobify is your favorite job platform. Easily find jobs right from your browser."
+                />
                 <Meta name="robots" content="index, follow" />
-                <Meta property="og:title" content="Jobify - Encuentra tu trabajo ideal" />
-                <Meta property="og:description" content="Plataforma para búsqueda de empleos en tu área. Accede a oportunidades laborales desde cualquier lugar." />
-                <Meta property="og:image" content="URL_DE_LA_IMAGEN" />
+                <Meta
+                    property="og:title"
+                    content="Jobify – Find Your Ideal Job"
+                />
+                <Meta
+                    property="og:description"
+                    content="The ultimate platform for job searches in your area. Access opportunities from anywhere."
+                />
+                <Meta property="og:image" content="IMAGE_URL" />
                 <Meta property="og:url" content="https://www.jobify.com" />
                 <Meta property="og:type" content="website" />
                 <Meta name="twitter:card" content="summary_large_image" />
-                <Meta name="twitter:title" content="Jobify - Portal de Empleos" />
-                <Meta name="twitter:description" content="Encuentra el trabajo de tus sueños con Jobify. Oportunidades laborales para todos." />
-                <Meta name="twitter:image" content="URL_DE_LA_IMAGEN" />
+                <Meta name="twitter:title" content="Jobify – Job Portal" />
+                <Meta
+                    name="twitter:description"
+                    content="Find your dream job with Jobify. Job opportunities for everyone."
+                />
+                <Meta name="twitter:image" content="IMAGE_URL" />
             </HeadProvider>
 
-            <h1 className="text-4xl font-extrabold text-center text-gray-800 tracking-tight mb-6 mt-10">
-                <span className="text-blue-600">J</span>OBS
-            </h1>
 
-            <JobFilter/>
-            <JobList />
+    
 
-            <Modal />
+                <h1 className="text-4xl font-extrabold text-center text-gray-800 tracking-tight mb-6 mt-10">
+                    <span className="text-blue-600">J</span>OBS
+                </h1>
+
+                <JobFilter />
+                <JobList />
+         
+
         </div>
     );
 }

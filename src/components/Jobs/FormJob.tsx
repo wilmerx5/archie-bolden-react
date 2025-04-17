@@ -167,7 +167,6 @@ export default function FormJob() {
                     )}
                 </div>
 
-                {/* Submit Button */}
                 <div className="pt-4">
                     <button
                         type="submit"

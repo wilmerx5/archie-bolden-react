@@ -4,32 +4,51 @@ import { useJobsStore } from "../stores/store";
 import { Job } from "../types/job";
 
 const useJobs = () => {
-    const { loadJobs, jobs } = useJobsStore();
-    const hasMounted = useRef(false);
+  const { loadJobs, loadSavedJobs, jobs, savedJobs } = useJobsStore();
+  const hasMountedJobs = useRef(false);
+  const hasMountedSaved = useRef(false);
 
-    useEffect(() => {
-      const savedJobs = localStorage.getItem("jobs");
-  
+  useEffect(() => {
+    const rawJobs = localStorage.getItem("jobs");
+    try {
+      const parsedJobs: Job[] = rawJobs ? JSON.parse(rawJobs) : defaultJobs;
+      loadJobs(parsedJobs);
+    } catch (err) {
+      console.error("Error parseando 'jobs' de localStorage", err);
+      loadJobs(defaultJobs);
+    }
+
+    const rawSaved = localStorage.getItem("savedJobs");
+    if (rawSaved) {
       try {
-        const parsedJobs: Job[] = savedJobs ? JSON.parse(savedJobs) : defaultJobs;
-        loadJobs(parsedJobs);
-      } catch (error) {
-        console.error("Error al parsear trabajos desde localStorage", error);
-        loadJobs(defaultJobs);
+        loadSavedJobs(JSON.parse(rawSaved));
+      } catch {
+        console.error("Error parseando 'savedJobs'", rawSaved);
+        loadSavedJobs([]);
       }
-    }, [loadJobs]);
-  
-    // Guardar trabajos en localStorage cuando cambian, excepto en el primer render
-    useEffect(() => {
-      if (!hasMounted.current) {
-        hasMounted.current = true;
-        return;
-      }
-  
-      localStorage.setItem("jobs", JSON.stringify(jobs));
-    }, [jobs]);
-  
-    return { loadJobs };
-  };
-  
-  export default useJobs;
+    } else {
+      loadSavedJobs([]);
+    }
+  }, [loadJobs, loadSavedJobs]);
+
+  // 2. Sincronizar jobs en localStorage
+  useEffect(() => {
+    if (!hasMountedJobs.current) {
+      hasMountedJobs.current = true;
+      return;
+    }
+    localStorage.setItem("jobs", JSON.stringify(jobs));
+  }, [jobs]);
+
+  useEffect(() => {
+    if (!hasMountedSaved.current) {
+      hasMountedSaved.current = true;
+      return;
+    }
+    localStorage.setItem("savedJobs", JSON.stringify(savedJobs));
+  }, [savedJobs]);
+
+  return { loadJobs, loadSavedJobs, jobs, savedJobs };
+};
+
+export default useJobs;

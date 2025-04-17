@@ -4,9 +4,11 @@ import { useJobsStore } from '../../stores/store';
 import FormJob from '../Jobs/FormJob';
 
 export default function Modal() {
-    const { selectedJob, closeModal, setUpdating, updating } = useJobsStore()
+    const { selectedJob, closeModal, setUpdating, updating, handleSaveJob, savedJobs } = useJobsStore()
 
     const showModal = useMemo(() => !Object.values(selectedJob).includes(''), [selectedJob])
+
+    const isAlreadySaved = savedJobs.some(el => el.id == selectedJob.id)
     return (
         <>
             <Transition appear show={showModal} as={Fragment}>
@@ -28,21 +30,21 @@ export default function Modal() {
                                 enter="ease-out duration-500"
                                 enterFrom="opacity-0 scale-95"
                                 enterTo="opacity-100 scale-100"
-                                   leaveFrom="opacity-10 scale-100"
-                        leaveTo="opacity-0 scale-95"
-                               
+                                leaveFrom="opacity-10 scale-100"
+                                leaveTo="opacity-0 scale-95"
+
                             >
                                 <Dialog.Panel className="relative w-full bg-white rounded-xl shadow-2xl transform transition-all sm:max-w-2xl">
                                     {updating ? (
                                         <div className="p-6 mt-50 ">
-                                             <button
-                                                    className="bg-red-400 w-20 float-end mt-2 mr-2 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition"
-                                                    onClick={closeModal}
-                                                >
-                                                    Close
-                                                </button>
-                                            <FormJob  />
-                                           
+                                            <button
+                                                className="bg-red-400 w-20 float-end mt-2 mr-2 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition"
+                                                onClick={closeModal}
+                                            >
+                                                Close
+                                            </button>
+                                            <FormJob />
+
                                         </div>
                                     ) : (
                                         <>
@@ -83,21 +85,30 @@ export default function Modal() {
                                                 </ul>
                                             </div>
 
-                                            {/* Action Buttons */}
-                                            <div className="flex justify-center sm:justify-end space-x-4 px-6 py-4">
+                                            <div className="flex flex-col sm:flex-row sm:justify-end items-center gap-4 px-6 py-4">
                                                 <button
-                                                    className="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition"
-                                                    onClick={closeModal}
+                                                    className={`w-full sm:w-auto py-2 px-6 rounded-lg transition text-white ${!isAlreadySaved ? 'bg-blue-600 hover:bg-blue-700' : 'bg-red-400 hover:bg-red-500'
+                                                        }`}
+                                                    onClick={() => handleSaveJob(selectedJob)}
                                                 >
-                                                    Close
+                                                    {isAlreadySaved ? 'Unsave' : 'Save'}
                                                 </button>
+
                                                 <button
-                                                    className="bg-yellow-500 text-white py-2 px-6 rounded-lg hover:bg-yellow-600 transition"
+                                                    className="w-full sm:w-auto bg-yellow-500 text-white py-2 px-6 rounded-lg hover:bg-yellow-600 transition"
                                                     onClick={() => setUpdating()}
                                                 >
                                                     Update Job
                                                 </button>
+
+                                                <button
+                                                    className="w-full sm:w-auto bg-red-800 text-white py-2 px-6 rounded-lg hover:bg-red-900 transition"
+                                                    onClick={closeModal}
+                                                >
+                                                    Close
+                                                </button>
                                             </div>
+
                                         </>
                                     )}
                                 </Dialog.Panel>
