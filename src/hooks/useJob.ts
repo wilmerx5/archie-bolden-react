@@ -14,7 +14,7 @@ const useJobs = () => {
       const parsedJobs: Job[] = rawJobs ? JSON.parse(rawJobs) : defaultJobs;
       loadJobs(parsedJobs);
     } catch (err) {
-      console.error("Error parseando 'jobs' de localStorage", err);
+      console.error("Error parsing 'jobs' from localStorage", err);
       loadJobs(defaultJobs);
     }
 
@@ -23,7 +23,7 @@ const useJobs = () => {
       try {
         loadSavedJobs(JSON.parse(rawSaved));
       } catch {
-        console.error("Error parseando 'savedJobs'", rawSaved);
+        console.error("Error parsing 'savedJobs'", rawSaved);
         loadSavedJobs([]);
       }
     } else {
